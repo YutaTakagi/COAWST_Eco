@@ -10,3 +10,4 @@ Lib/SCRIP_COAWST/netcdf.inc
 *.nc
 *.bot
 *.grd
+test*.F
