@@ -30,7 +30,8 @@
 # First the defaults
 #
                FC := gfortran
-           FFLAGS := -frepack-arrays
+           FFLAGS := -frepack-arrays -w -fallow-argument-mismatch -mcmodel=large -ffree-line-length-none
+#           FFLAGS := -w -fallow-argument-mismatch
               CPP := /usr/bin/cpp
          CPPFLAGS := -P -traditional
                CC := gcc
@@ -95,9 +96,16 @@ ifdef USE_DEBUG
 else
            FFLAGS += -O3
 #           I do not use -ffast-math it does not maintain enough accuracy!
-           FFLAGS += -ftree-vectorize -ftree-loop-linear -funroll-loops -w -ffree-form -ffree-line-length-none -frecord-marker=4 -fconvert=big-endian
+#           FFLAGS += -ftree-vectorize -ftree-loop-linear -funroll-loops -w -ffree-form -ffree-line-length-none -frecord-marker=4 -fconvert=big-endian
 ##                   -fconvert=big-endian
 endif
+
+# Save compiler flags without the MCT or ESMF libraries additions
+# to keep the string (MY_FFLAGS) in "mod_strings.o" short. Otherwise,
+# it will exceed the maximum number of characters allowed for
+# free-format compilation.
+
+        MY_FFLAGS := $(FFLAGS)
 
 ifdef USE_MPI
            FFLAGS += -I/usr/include
