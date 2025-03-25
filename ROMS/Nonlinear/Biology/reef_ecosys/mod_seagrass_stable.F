@@ -54,7 +54,7 @@ MODULE mod_seagrass
     real(8), pointer :: P_max                                   (:    )   ! [umol.C m-2.leaf s-1]       Species specific maximum photoynthesis rate  
     real(8), pointer :: I_k                                     (:    )   ! [umol.photon m-2 s-1]       Irradiance where the initial slope intersects P_max on the photosynthesis-irradiance curve
     ! photoynthesis: DIC-limit
-    real(8), pointer :: Lf_DIC_uptake_max                       (:    )   ! [umol.DIC g-1.lf.drywt s-1] Maximum uptake rate of DIC in the leaves
+    real(8), pointer :: Lf_DIC_uptake_max                       (:    )   ! [umol.DIC m-2.lf s-1]       Maximum uptake rate of DIC in the leaves
     real(8), pointer :: k_lf_DIC                                (:    )   ! [umol.DIC L-1]              Half saturation consentration of DIC in water column for growth
 # if defined SEAGRASS_ROOT_CARBON_OXYGEN_EXCHANGE
     real(8), pointer :: Rt_DIC_flux_max                         (:    )   ! [umol.DIC g-1.rt.drywt s-1] Maximum uptake rate of DIC in the roots 
@@ -62,40 +62,30 @@ MODULE mod_seagrass
 # endif
     ! photoynthesis: nutrient-limit
 # if defined SEAGRASS_LEAF_NUTRIENT_UPTAKE
-    real(8), pointer :: Lf_NO3_uptake_max                       (:    )   ! [umol.NO3 g-1.lf.drywt s-1] Maximum uptake rate of NO3 in the leaves
+    real(8), pointer :: Lf_NO3_uptake_max                       (:    )   ! [umol.NO3 m-2.lf s-1]       Maximum uptake rate of NO3 in the leaves
     real(8), pointer :: k_lf_NO3                                (:    )   ! [umol.NO3 L-1]              Half saturation consentration of NO3 in water column for growth
-    real(8), pointer :: smin_lf_NO3                             (:    )   ! [umol.NO3 L-1]              Minimum consentration of NO3 in water column for uptake
-    real(8), pointer :: Lf_NO3_ratio_slope                      (:    )   ! [ ]                         Slope of nitrogen species ratio term to multiply michaelis-menten
-    real(8), pointer :: Lf_NH4_uptake_max                       (:    )   ! [umol.NH4 g-1.lf.drywt s-1] Maximum uptake rate of NH4 in the leaves
+    real(8), pointer :: Lf_NH4_uptake_max                       (:    )   ! [umol.NH4 m-2.lf s-1]       Maximum uptake rate of NH4 in the leaves
     real(8), pointer :: k_lf_NH4                                (:    )   ! [umol.NH4 L-1]              Half saturation consentration of NH4 in water column for growth
-    real(8), pointer :: smin_lf_NH4                             (:    )   ! [umol.NH4 L-1]              Minimum consentration of NH4 in water column for uptake
-    real(8), pointer :: Lf_NH4_ratio_slope                      (:    )   ! [ ]                         Slope of nitrogen species ratio term to multiply michaelis-menten
-    real(8), pointer :: Lf_PO4_uptake_max                       (:    )   ! [umol.PO4 g-1.lf.drywt s-1] Maximum uptake rate of PO4 in the leaves
+    real(8), pointer :: Lf_PO4_uptake_max                       (:    )   ! [umol.PO4 m-2.lf s-1]       Maximum uptake rate of PO4 in the leaves
     real(8), pointer :: k_lf_PO4                                (:    )   ! [umol.PO4 L-1]              Half saturation consentration of PO4 in water column for growth
-    real(8), pointer :: smin_lf_PO4                             (:    )   ! [umol.PO4 L-1]              Minimum consentration of PO4 in water column for uptake
 # endif
 # if defined SEAGRASS_ROOT_NUTRIENT_UPTAKE
     real(8), pointer :: Rt_NO3_flux_max                         (:    )   ! [umol.NO3 g-1.rt.drywt s-1] Maximum uptake rate of NO3 in the roots 
     real(8), pointer :: k_rt_NO3                                (:    )   ! [umol.NO3 L-1]              Half saturation consentration of NO3 in soil pore water for growth
-    real(8), pointer :: smin_rt_NO3                             (:    )   ! [umol.NO3 L-1]              Minimum consentration of NO3 in soil pore water for uptake
-    real(8), pointer :: Rt_NO3_ratio_slope                      (:    )   ! [ ]                         Slope of nitrogen species ratio term to multiply michaelis-menten
     real(8), pointer :: Rt_NH4_flux_max                         (:    )   ! [umol.NH4 g-1.rt.drywt s-1] Maximum uptake rate of NH4 in the roots 
     real(8), pointer :: k_rt_NH4                                (:    )   ! [umol.NH4 L-1]              Half saturation consentration of NH4 in soil pore water for growth
-    real(8), pointer :: smin_rt_NH4                             (:    )   ! [umol.NH4 L-1]              Minimum consentration of NH4 in soil pore water for uptake
-    real(8), pointer :: Rt_NH4_ratio_slope                      (:    )   ! [ ]                         Slope of nitrogen species ratio term to multiply michaelis-menten
     real(8), pointer :: Rt_PO4_flux_max                         (:    )   ! [umol.PO4 g-1.rt.drywt s-1] Maximum uptake rate of PO4 in the roots 
     real(8), pointer :: k_rt_PO4                                (:    )   ! [umol.PO4 L-1]              Half saturation consentration of PO4 in soil pore water for growth
-    real(8), pointer :: smin_rt_PO4                             (:    )   ! [umol.PO4 L-1]              Minimum consentration of PO4 in soil pore water for uptake
 # endif
     ! respiration: DO-limit
-    real(8), pointer :: Lf_DO_uptake_max                        (:    )   ! [umol.DO g-1.lf.drywt s-1]  Maximum uptake rate of DO in the leaves
+    real(8), pointer :: Lf_DO_uptake_max                        (:    )   ! [umol.DO m-2.lf s-1]        Maximum uptake rate of DO in the leaves
     real(8), pointer :: k_lf_DO                                 (:    )   ! [umol.DO L-1]               Half saturation consentration of DO in water column for respiration
 # if defined SEAGRASS_ROOT_CARBON_OXYGEN_EXCHANGE
     real(8), pointer :: Rt_DO_flux_max                          (:    )   ! [umol.DO g-1.rt.drywt s-1]  Maximum uptake rate of DO in the roots 
     real(8), pointer :: k_rt_DO                                 (:    )   ! [umol.DO L-1]               Half saturation consentration of DO in soil pore water for growth
 # endif
     ! respiration: required
-    real(8), pointer :: R_basal                                 (:    )   ! [umol.C g-1.leaf s-1]       Maximum respiration rate
+    real(8), pointer :: R_basal                                 (:    )   ! [umol.C m-2.leaf s-1]       Maximum respiration rate
     real(8), pointer :: Turnover_rate                           (:    )   ! [umol.C umol-1.C day-1]     Base mass turnover rate (dieoff) in fraction of mass per day
     ! dieoff when respiration is insufficient
     real(8), pointer :: max_anoxic_dieoff_rate                  (:    )   ! [mol.C mol-1.C day-1]       maximum dieoff due to anoxia in fraction of mass per day, represents atypical modes of survival such as anaerobic respiration and cellular canibalism which limits extreme death rates
@@ -210,7 +200,7 @@ MODULE mod_seagrass
     allocate( SGRASS(ng)%P_max                                      (Nsg)                  ) ! [umol.C m-2.leaf s-1]       Species specific maximum photoynthesis rate  
     allocate( SGRASS(ng)%I_k                                        (Nsg)                  ) ! [umol.photon m-2 s-1]       Irradiance where the initial slope intersects P_max on the photosynthesis-irradiance curve
     ! photoynthesis: DIC-limit
-    allocate( SGRASS(ng)%Lf_DIC_uptake_max                          (Nsg)                  ) ! [umol.DIC g-1.lf.drywt s-1] Maximum uptake rate of DIC in the leaves
+    allocate( SGRASS(ng)%Lf_DIC_uptake_max                          (Nsg)                  ) ! [umol.DIC m-2.lf s-1]       Maximum uptake rate of DIC in the leaves
     allocate( SGRASS(ng)%k_lf_DIC                                   (Nsg)                  ) ! [umol.DIC L-1]              Half saturation consentration of DIC in water column for growth
 # if defined SEAGRASS_ROOT_CARBON_OXYGEN_EXCHANGE
     allocate( SGRASS(ng)%Rt_DIC_flux_max                            (Nsg)                  ) ! [umol.DIC g-1.rt.drywt s-1] Maximum uptake rate of DIC in the roots 
@@ -218,40 +208,30 @@ MODULE mod_seagrass
 # endif
     ! photoynthesis: nutrient-limit
 # if defined SEAGRASS_LEAF_NUTRIENT_UPTAKE
-    allocate( SGRASS(ng)%Lf_NO3_uptake_max                          (Nsg)                  ) ! [umol.NO3 g-1.lf.drywt s-1] Maximum uptake rate of NO3 in the leaves
+    allocate( SGRASS(ng)%Lf_NO3_uptake_max                          (Nsg)                  ) ! [umol.NO3 m-2.lf s-1]       Maximum uptake rate of NO3 in the leaves
     allocate( SGRASS(ng)%k_lf_NO3                                   (Nsg)                  ) ! [umol.NO3 L-1]              Half saturation consentration of NO3 in water column for growth
-    allocate( SGRASS(ng)%smin_lf_NO3                                (Nsg)                  ) ! [umol.NO3 L-1]              Minimum consentration of NO3 in water column for uptake
-    allocate( SGRASS(ng)%Lf_NO3_ratio_slope                         (Nsg)                  ) ! [ ]                         Slope of nitrogen species ratio term to multiply michaelis-menten
-    allocate( SGRASS(ng)%Lf_NH4_uptake_max                          (Nsg)                  ) ! [umol.NH4 g-1.lf.drywt s-1] Maximum uptake rate of NH4 in the leaves
+    allocate( SGRASS(ng)%Lf_NH4_uptake_max                          (Nsg)                  ) ! [umol.NH4 m-2.lf s-1]       Maximum uptake rate of NH4 in the leaves
     allocate( SGRASS(ng)%k_lf_NH4                                   (Nsg)                  ) ! [umol.NH4 L-1]              Half saturation consentration of NH4 in water column for growth
-    allocate( SGRASS(ng)%smin_lf_NH4                                (Nsg)                  ) ! [umol.NH4 L-1]              Minimum consentration of NH4 in water column for uptake
-    allocate( SGRASS(ng)%Lf_NH4_ratio_slope                         (Nsg)                  ) ! [ ]                         Slope of nitrogen species ratio term to multiply michaelis-menten
-    allocate( SGRASS(ng)%Lf_PO4_uptake_max                          (Nsg)                  ) ! [umol.PO4 g-1.lf.drywt s-1] Maximum uptake rate of PO4 in the leaves
+    allocate( SGRASS(ng)%Lf_PO4_uptake_max                          (Nsg)                  ) ! [umol.PO4 m-2.lf s-1]       Maximum uptake rate of PO4 in the leaves
     allocate( SGRASS(ng)%k_lf_PO4                                   (Nsg)                  ) ! [umol.PO4 L-1]              Half saturation consentration of PO4 in water column for growth
-    allocate( SGRASS(ng)%smin_lf_PO4                                (Nsg)                  ) ! [umol.PO4 L-1]              Minimum consentration of PO4 in water column for uptake
 # endif
 # if defined SEAGRASS_ROOT_NUTRIENT_UPTAKE
     allocate( SGRASS(ng)%Rt_NO3_flux_max                            (Nsg)                  ) ! [umol.NO3 g-1.rt.drywt s-1] Maximum uptake rate of NO3 in the roots 
     allocate( SGRASS(ng)%k_rt_NO3                                   (Nsg)                  ) ! [umol.NO3 L-1]              Half saturation consentration of NO3 in soil pore water for growth
-    allocate( SGRASS(ng)%smin_rt_NO3                                (Nsg)                  ) ! [umol.NO3 L-1]              Minimum consentration of NO3 in soil pore water for uptake
-    allocate( SGRASS(ng)%Rt_NO3_ratio_slope                         (Nsg)                  ) ! [ ]                         Slope of nitrogen species ratio term to multiply michaelis-menten
     allocate( SGRASS(ng)%Rt_NH4_flux_max                            (Nsg)                  ) ! [umol.NH4 g-1.rt.drywt s-1] Maximum uptake rate of NH4 in the roots 
     allocate( SGRASS(ng)%k_rt_NH4                                   (Nsg)                  ) ! [umol.NH4 L-1]              Half saturation consentration of NH4 in soil pore water for growth
-    allocate( SGRASS(ng)%smin_rt_NH4                                (Nsg)                  ) ! [umol.NH4 L-1]              Minimum consentration of NH4 in soil pore water for uptake
-    allocate( SGRASS(ng)%Rt_NH4_ratio_slope                         (Nsg)                  ) ! [ ]                         Slope of nitrogen species ratio term to multiply michaelis-menten
     allocate( SGRASS(ng)%Rt_PO4_flux_max                            (Nsg)                  ) ! [umol.PO4 g-1.rt.drywt s-1] Maximum uptake rate of PO4 in the roots 
     allocate( SGRASS(ng)%k_rt_PO4                                   (Nsg)                  ) ! [umol.PO4 L-1]              Half saturation consentration of PO4 in soil pore water for growth
-    allocate( SGRASS(ng)%smin_rt_PO4                                (Nsg)                  ) ! [umol.PO4 L-1]              Minimum consentration of PO4 in soil pore water for uptake
 # endif
     ! respiration: DO-limit
-    allocate( SGRASS(ng)%Lf_DO_uptake_max                           (Nsg)                  ) ! [umol.DO g-1.lf.drywt s-1] Maximum uptake rate of DO in the leaves
+    allocate( SGRASS(ng)%Lf_DO_uptake_max                           (Nsg)                  ) ! [umol.DO m-2.lf s-1]        Maximum uptake rate of DO in the leaves
     allocate( SGRASS(ng)%k_lf_DO                                    (Nsg)                  ) ! [umol.DO L-1]               Half saturation consentration of DO in water column for respiration
 # if defined SEAGRASS_ROOT_CARBON_OXYGEN_EXCHANGE
     allocate( SGRASS(ng)%Rt_DO_flux_max                             (Nsg)                  ) ! [umol.DO g-1.rt.drywt s-1]  Maximum uptake rate of DO in the roots 
     allocate( SGRASS(ng)%k_rt_DO                                    (Nsg)                  ) ! [umol.DO L-1]               Half saturation consentration of DO in soil pore water for growth
 # endif
     ! respiration: required
-    allocate( SGRASS(ng)%R_basal                                    (Nsg)                  ) ! [umol.C g-1.leaf s-1]       Maximum respiration rate
+    allocate( SGRASS(ng)%R_basal                                    (Nsg)                  ) ! [umol.C m-2.leaf s-1]       Maximum respiration rate
     allocate( SGRASS(ng)%Turnover_rate                              (Nsg)                  ) ! [umol.C umol-1.C day-1]     Base mass turnover rate (dieoff) in fraction of mass per day
     ! dieoff when respiration is insufficient
     allocate( SGRASS(ng)%max_anoxic_dieoff_rate                     (Nsg)                  ) ! [mol.C mol-1.C day-1]       maximum dieoff due to anoxia in fraction of mass per day, represents atypical modes of survival such as anaerobic respiration and cellular canibalism which limits extreme death rates
@@ -368,8 +348,7 @@ MODULE mod_seagrass
     SGRASS(ng)%I_k                                  = [ 180d0    ]                                    ! [umol.photon m-2 s-1]       Irradiance where the initial slope intersects P_max on the photosynthesis-irradiance curve                    ! Calculated from rETR data from Liu et al. (2005), rETR to ETR conversion using Aquation (2020), ETR to carbon assimilation rate using Miyazawa and Yahata (2006), and a leaf bend angle of 10◦ from James et al. (2021) (refer to master's thesi Section 6.3.2b)
 
     ! photoynthesis: DIC-limit
-    ! SGRASS(ng)%Lf_DIC_uptake_max                    = [ 73.8d0   ]                                    ! [umol.DIC m-2.lf s-1] Maximum uptake rate of DIC in the leaves                                                                      ! tuning set equal to P_max
-    SGRASS(ng)%Lf_DIC_uptake_max                    = [ 1.0696d0 ]                                    ! [umol.DIC g-1.lf.drywt s-1] Maximum uptake rate of DIC in the leaves                                                                      ! tuning set equal to P_max [73.8 umol/m2 s] / [0.069 kg/m2] [kg/1000g] = 1.0696 [ umol/g s]
+    SGRASS(ng)%Lf_DIC_uptake_max                    = [ 73.8d0   ]                                    ! [umol.DIC m-2.lf s-1]       Maximum uptake rate of DIC in the leaves                                                                      ! tuning set equal to P_max
     ! SGRASS(ng)%k_lf_DIC                             = [ 4500d0   ]                                    ! [umol.DIC L-1]              Half saturation consentration of DIC in water column for growth                                             ! 4500 µmol L-1 from Bjo ̈rk et al. (1997) (master's thesis section 6.3.2b)
     SGRASS(ng)%k_lf_DIC                             = [ 3000.0d0 ]                                    ! [umol.DIC L-1]              Half saturation consentration of DIC in water column for growth                                               ! yt_edit Tuning
 # if defined SEAGRASS_ROOT_CARBON_OXYGEN_EXCHANGE
@@ -380,62 +359,32 @@ MODULE mod_seagrass
     ! photoynthesis: nutrient-limit
 # if defined SEAGRASS_LEAF_NUTRIENT_UPTAKE
     ! SGRASS(ng)%Lf_NO3_uptake_max                    = [ 200.0d0/35.0d0  ]                            ! [umol.NO3 m-2.lf s-1]       Maximum uptake rate of NO3 in the leaves                                                                      ! yt_edit tuning  set equal to max photosynthesis
-    ! SGRASS(ng)%Lf_NO3_uptake_max                    = [ 73.8d0/35d0 ]                                 ! [umol.NO3 m-2.lf s-1]       Maximum uptake rate of NO3 in the leaves                                                                      ! yt_edit tuning  set equal to max photosynthesis
-    ! SGRASS(ng)%k_lf_NO3                             = [ 0.52d0   ]                                    ! [umol.NO3 L-1]              Half saturation consentration of NO3 in water column for growth                                               ! Loosely calculate from Ow et al. (2016) (master's thesis Section 6.3.5b)
-    ! SGRASS(ng)%smin_lf_NO3                          = [ 0.0d0    ]                                    ! [umol.NO3 L-1]              Minimum consentration of NO3 in water column for uptake                                               
-    ! SGRASS(ng)%Lf_NH4_uptake_max                    = [ 73.8d0/35d0 ]                                 ! [umol.NH4 m-2.lf s-1]       Maximum uptake rate of NH4 in the leaves                                                                      ! yt_edit tuning  set equal to max photosynthesis
-    ! SGRASS(ng)%k_lf_NH4                             = [ 36.3d0   ]                                    ! [umol.NH4 L-1]              Half saturation consentration of NH4 in water column for growth                                               ! Stapel et al. (1996) (master's thesis Section 6.3.5b)
-    ! SGRASS(ng)%smin_lf_NH4                          = [ 0.0d0    ]                                    ! [umol.NH4 L-1]              Minimum consentration of NH4 in water column for uptake                                               
-    ! SGRASS(ng)%Lf_PO4_uptake_max                    = [ 73.8d0/545d0 ]                                ! [umol.PO4 m-2.lf s-1]       Maximum uptake rate of PO4 in the leaves                                                                      ! yt_edit tuning  set equal to max photosynthesis
-    ! SGRASS(ng)%k_lf_PO4                             = [ 11.2d0   ]                                    ! [umol.PO4 L-1]              Half saturation consentration of PO4 in water column for growth                                               ! Stapel et al. (1996) (master's thesis Section 6.3.5b)
-    ! SGRASS(ng)%smin_lf_PO4                          = [ 0.0d0    ]                                    ! [umol.PO4 L-1]              Minimum consentration of PO4 in water column for uptake                                               
-    SGRASS(ng)%Lf_NO3_uptake_max                    = [ 14.6d0/3600d0 ]                               ! [umol.NO3 g-1.lf.drywt s-1] Maximum uptake rate of NO3 in the leaves                                                                      ! Yuta seagrass experiment - Thalassia hemprichii
-    SGRASS(ng)%k_lf_NO3                             = [ 2.39d0   ]                                    ! [umol.NO3 L-1]              Half saturation consentration of NO3 in water column for growth                                               ! Yuta seagrass experiment - Thalassia hemprichii
-    SGRASS(ng)%smin_lf_NO3                          = [ 0.58d0   ]                                    ! [umol.NO3 L-1]              Minimum consentration of NO3 in water column for uptake                                                       ! Yuta seagrass experiment - Thalassia hemprichii
-    SGRASS(ng)%Lf_NO3_ratio_slope                   = [ 1.85d0   ]                                    ! [ ]                         Slope of nitrogen species ratio term to multiply michaelis-menten                                             ! Yuta seagrass experiment - Thalassia hemprichii
-    SGRASS(ng)%Lf_NH4_uptake_max                    = [ 13.3d0/3600d0 ]                               ! [umol.NH4 g-1.lf.drywt s-1] Maximum uptake rate of NH4 in the leaves                                                                      ! Yuta seagrass experiment - Thalassia hemprichii
-    SGRASS(ng)%k_lf_NH4                             = [ 2.17d0   ]                                    ! [umol.NH4 L-1]              Half saturation consentration of NH4 in water column for growth                                               ! Yuta seagrass experiment - Thalassia hemprichii
-    SGRASS(ng)%smin_lf_NH4                          = [ 0.39d0   ]                                    ! [umol.NH4 L-1]              Minimum consentration of NH4 in water column for uptake                                                       ! Yuta seagrass experiment - Thalassia hemprichii
-    SGRASS(ng)%Lf_NH4_ratio_slope                   = [ 1.49d0   ]                                    ! [ ]                         Slope of nitrogen species ratio term to multiply michaelis-menten                                             ! Yuta seagrass experiment - Thalassia hemprichii
-    SGRASS(ng)%Lf_PO4_uptake_max                    = [ 1.50d0/3600d0 ]                               ! [umol.PO4 g-1.lf.drywt s-1] Maximum uptake rate of PO4 in the leaves                                                                      ! Yuta seagrass experiment - Thalassia hemprichii
-    SGRASS(ng)%k_lf_PO4                             = [ 0.36d0   ]                                    ! [umol.PO4 L-1]              Half saturation consentration of PO4 in water column for growth                                               ! Yuta seagrass experiment - Thalassia hemprichii
-    SGRASS(ng)%smin_lf_PO4                          = [ 0.02d0   ]                                    ! [umol.PO4 L-1]              Minimum consentration of PO4 in water column for uptake                                                       ! Yuta seagrass experiment - Thalassia hemprichii
+    SGRASS(ng)%Lf_NO3_uptake_max                    = [ 73.8d0/35d0 ]                                 ! [umol.NO3 m-2.lf s-1]       Maximum uptake rate of NO3 in the leaves                                                                      ! yt_edit tuning  set equal to max photosynthesis
+    SGRASS(ng)%k_lf_NO3                             = [ 0.52d0   ]                                    ! [umol.NO3 L-1]              Half saturation consentration of NO3 in water column for growth                                               ! Loosely calculate from Ow et al. (2016) (master's thesis Section 6.3.5b)
+    SGRASS(ng)%Lf_NH4_uptake_max                    = [ 73.8d0/35d0 ]                                 ! [umol.NH4 m-2.lf s-1]       Maximum uptake rate of NH4 in the leaves                                                                      ! yt_edit tuning  set equal to max photosynthesis
+    SGRASS(ng)%k_lf_NH4                             = [ 36.3d0   ]                                    ! [umol.NH4 L-1]              Half saturation consentration of NH4 in water column for growth                                               ! Stapel et al. (1996) (master's thesis Section 6.3.5b)
+    SGRASS(ng)%Lf_PO4_uptake_max                    = [ 73.8d0/545d0 ]                                ! [umol.PO4 m-2.lf s-1]       Maximum uptake rate of PO4 in the leaves                                                                      ! yt_edit tuning  set equal to max photosynthesis
+    SGRASS(ng)%k_lf_PO4                             = [ 11.2d0   ]                                    ! [umol.PO4 L-1]              Half saturation consentration of PO4 in water column for growth                                               ! Stapel et al. (1996) (master's thesis Section 6.3.5b)
 # endif
 # if defined SEAGRASS_ROOT_NUTRIENT_UPTAKE
-    ! SGRASS(ng)%Rt_NO3_flux_max                      = [ 73.8d0/35d0/0.069d0 ]                         ! [umol.NO3 g-1.rt.drywt s-1] Maximum uptake rate of NO3 in the roots                                                                       ! yt_edit tuning, same as leaves
-    ! SGRASS(ng)%k_rt_NO3                             = [ 0.52d0*10d0 ]                                 ! [umol.NO3 L-1]              Half saturation consentration of NO3 in soil pore water for growth                                            ! yt_edit tuning, ten times higher than leaves
-    ! SGRASS(ng)%smin_rt_NO3                          = [ 0.0d0    ]                                    ! [umol.NO3 L-1]              Minimum consentration of NO3 in soil pore water for uptake                                            
-    ! SGRASS(ng)%Rt_NH4_flux_max                      = [ 73.8d0/35d0/0.069d0 ]                         ! [umol.NH4 g-1.rt.drywt s-1] Maximum uptake rate of NH4 in the roots                                                                       ! yt_edit tuning, same as leaves
-    ! SGRASS(ng)%k_rt_NH4                             = [ 36.3d0*10d0 ]                                 ! [umol.NH4 L-1]              Half saturation consentration of NH4 in soil pore water for growth                                            ! yt_edit tuning, ten times higher than leaves
-    ! SGRASS(ng)%smin_rt_NH4                          = [ 0.0d0    ]                                    ! [umol.NH4 L-1]              Minimum consentration of NH4 in soil pore water for uptake                                            
-    ! SGRASS(ng)%Rt_PO4_flux_max                      = [ 73.8/545d0/0.069d0  ]                         ! [umol.PO4 g-1.rt.drywt s-1] Maximum uptake rate of PO4 in the roots                                                                       ! yt_edit tuning, same as leaves
-    ! SGRASS(ng)%k_rt_PO4                             = [ 11.2d0*10d0 ]                                 ! [umol.PO4 L-1]              Half saturation consentration of PO4 in soil pore water for growth                                            ! yt_edit tuning, ten times higher than leaves
-    ! SGRASS(ng)%smin_rt_PO4                          = [ 0.0d0    ]                                    ! [umol.PO4 L-1]              Minimum consentration of PO4 in soil pore water for uptake                                            
-    SGRASS(ng)%Rt_NO3_flux_max                      = [ 6581.0d0/3600d0 ]                               ! [umol.NO3 g-1.rt.drywt s-1] Maximum uptake rate of NO3 in the roots                                                                     ! Yuta seagrass experiment - Thalassia hemprichii
-    SGRASS(ng)%k_rt_NO3                             = [ 34417d0  ]                                    ! [umol.NO3 L-1]              Half saturation consentration of NO3 in soil pore water for growth                                            ! Yuta seagrass experiment - Thalassia hemprichii
-    SGRASS(ng)%smin_rt_NO3                          = [ 0.0d0    ]                                    ! [umol.NO3 L-1]              Minimum consentration of NO3 in soil pore water for uptake                                                    ! Yuta seagrass experiment - Thalassia hemprichii
-    SGRASS(ng)%Rt_NO3_ratio_slope                   = [ 1.91d0   ]                                    ! [ ]                         Slope of nitrogen species ratio term to multiply michaelis-menten                                             ! Yuta seagrass experiment - Thalassia hemprichii
-    SGRASS(ng)%Rt_NH4_flux_max                      = [ 43.0d0/3600d0 ]                               ! [umol.NH4 g-1.rt.drywt s-1] Maximum uptake rate of NH4 in the roots                                                                       ! Yuta seagrass experiment - Thalassia hemprichii
-    SGRASS(ng)%k_rt_NH4                             = [ 22.0d0 ]                                      ! [umol.NH4 L-1]              Half saturation consentration of NH4 in soil pore water for growth                                            ! Yuta seagrass experiment - Thalassia hemprichii
-    SGRASS(ng)%smin_rt_NH4                          = [ 0.0d0    ]                                    ! [umol.NH4 L-1]              Minimum consentration of NH4 in soil pore water for uptake                                                    ! Yuta seagrass experiment - Thalassia hemprichii
-    SGRASS(ng)%Rt_NH4_ratio_slope                   = [ 2.27d0   ]                                    ! [ ]                         Slope of nitrogen species ratio term to multiply michaelis-menten                                             ! Yuta seagrass experiment - Thalassia hemprichii
-    SGRASS(ng)%Rt_PO4_flux_max                      = [ 3.3d0/3600d0 ]                              ! [umol.PO4 g-1.rt.drywt s-1] Maximum uptake rate of PO4 in the roots                                                                         ! Yuta seagrass experiment - Thalassia hemprichii
-    SGRASS(ng)%k_rt_PO4                             = [ 1.45d0   ]                                    ! [umol.PO4 L-1]              Half saturation consentration of PO4 in soil pore water for growth                                            ! Yuta seagrass experiment - Thalassia hemprichii
-    SGRASS(ng)%smin_rt_PO4                          = [ 0.0d0    ]                                    ! [umol.PO4 L-1]              Minimum consentration of PO4 in soil pore water for uptake                                                    ! Yuta seagrass experiment - Thalassia hemprichii
+    SGRASS(ng)%Rt_NO3_flux_max                      = [ 73.8d0/35d0/0.069d0 ]                         ! [umol.NO3 g-1.rt.drywt s-1] Maximum uptake rate of NO3 in the roots                                                                       ! yt_edit tuning, same as leaves
+    SGRASS(ng)%k_rt_NO3                             = [ 0.52d0*10d0 ]                                 ! [umol.NO3 L-1]              Half saturation consentration of NO3 in soil pore water for growth                                            ! yt_edit tuning, ten times higher than leaves
+    SGRASS(ng)%Rt_NH4_flux_max                      = [ 73.8d0/35d0/0.069d0 ]                         ! [umol.NH4 g-1.rt.drywt s-1] Maximum uptake rate of NH4 in the roots                                                                       ! yt_edit tuning, same as leaves
+    SGRASS(ng)%k_rt_NH4                             = [ 36.3d0*10d0 ]                                 ! [umol.NH4 L-1]              Half saturation consentration of NH4 in soil pore water for growth                                            ! yt_edit tuning, ten times higher than leaves
+    SGRASS(ng)%Rt_PO4_flux_max                      = [ 73.8/545d0/0.069d0  ]                         ! [umol.PO4 g-1.rt.drywt s-1] Maximum uptake rate of PO4 in the roots                                                                       ! yt_edit tuning, same as leaves
+    SGRASS(ng)%k_rt_PO4                             = [ 11.2d0*10d0 ]                                 ! [umol.PO4 L-1]              Half saturation consentration of PO4 in soil pore water for growth                                            ! yt_edit tuning, ten times higher than leaves
 # endif
     
     ! respiration: DO-limit
     ! SGRASS(ng)%Lf_DO_uptake_max                     = [ 2.075d0  ]                                  ! [umol.DO m-2.lf s-1]        Maximum uptake rate of DO in the leaves                                                                       ! 2.075 umol.C/m2.leaf/s calculated from Rasmusson et al. (2020) (refer to master's thesis 6.3.3a)
-    ! SGRASS(ng)%Lf_DO_uptake_max                     = [ 40d0     ]                                    ! [umol.DO m-2.lf s-1]        Maximum uptake rate of DO in the leaves                                                                       ! tuning
-    SGRASS(ng)%Lf_DO_uptake_max                     = [ 0.5797d0 ]                                    ! [umol.DO g-1.lf.drywt s-1] Maximum uptake rate of DO in the leaves                                                                       ! tuning  [40 umol/m2 s] / [0.069 kg/m2] [kg/1000g] = 0.5797 [ umol/g s]
+    SGRASS(ng)%Lf_DO_uptake_max                     = [ 40d0     ]                                    ! [umol.DO m-2.lf s-1]        Maximum uptake rate of DO in the leaves                                                                       ! tuning
     SGRASS(ng)%k_lf_DO                              = [ 43d0     ]                                    ! [umol.DO L-1]               Half saturation consentration of DO in water column for respiration                                           ! 43 umol.O2/L Loosely calculated from Rasmusson et al. (2020) (Section 6.3.3b)
 # if defined SEAGRASS_ROOT_CARBON_OXYGEN_EXCHANGE
-    SGRASS(ng)%Rt_DO_flux_max                       = [ 0.5797d0 ]                                    ! [umol.DO g-1.rt.drywt s-1]  Maximum uptake rate of DO in the roots                                                                        ! yt_edit tuning, same as leaves
-    SGRASS(ng)%k_rt_DO                              = [ 43d0     ]                                    ! [umol.DO L-1]               Half saturation consentration of DO in soil pore water for growth                                             ! yt_edit tuning, same as leaves
+    SGRASS(ng)%Rt_DO_flux_max                       = [ 40d0/0.069d0 ]                                ! [umol.DO g-1.rt.drywt s-1]  Maximum uptake rate of DO in the roots                                                                        ! yt_edit tuning, same as leaves
+    SGRASS(ng)%k_rt_DO                              = [ 43d0*10d0 ]                                   ! [umol.DO L-1]               Half saturation consentration of DO in soil pore water for growth                                             ! yt_edit tuning, same as leaves
 # endif
     ! respiration: required
-    ! SGRASS(ng)%R_basal                              = [ 2.5265d0 ]                                    ! [umol.C m-2.leaf s-1]       Maximum respiration rate                                                                                      ! tuning: half-life in complete darkness is ~7.0 days.
-    SGRASS(ng)%R_basal                              = [ 0.0366d0 ]                                    ! [umol.C g-1.leaf s-1]       Maximum respiration rate                                                                                      ! tuning: half-life in complete darkness is ~7.0 days. [2.5265 umol/m2 s] / [0.069 kg/m2] [kg/1000g] = 0.0366 [ umol/g s]
+    SGRASS(ng)%R_basal                              = [ 2.5265d0 ]                                    ! [umol.C m-2.leaf s-1]       Maximum respiration rate                                                                                      ! tuning: half-life in complete darkness is ~7.0 days.
     SGRASS(ng)%Turnover_rate                        = [0.01      ]                                    ! [umol.C umol-1.C day-1]     Base mass turnover rate (dieoff) in fraction of mass per day
     ! dieoff when respiration is insufficient
     SGRASS(ng)%max_anoxic_dieoff_rate               = [ 0.5d0    ]                                    ! [mol.C mol-1.C day-1]       maximum dieoff due to anoxia in fraction of mass per day, represents atypical modes of survival such as anaerobic respiration and cellular canibalism which limits extreme death rates ! tuning
@@ -740,7 +689,7 @@ MODULE mod_seagrass
     real(8), pointer      :: P_max                      ! [umol.C m-2.leaf s-1]       Maximum photoynthesis rate
     real(8), pointer      :: I_k                        ! [umol.photon m-2 s-1]       Irradiance where the initial slope intersects P_max on the photosynthesis-irradiance curve
     ! photosynthesis: DIC-limit
-    real(8), pointer      :: Lf_DIC_uptake_max          ! [umol.DIC g-1.lf.drywt s-1] Maximum uptake rate of DIC in the leaves
+    real(8), pointer      :: Lf_DIC_uptake_max          ! [umol.DIC m-2.lf s-1]       Maximum uptake rate of DIC in the leaves
     real(8), pointer      :: k_lf_DIC                   ! [umol.DIC L-1]              Half saturation consentration of DIC in water column for growth
 # if defined SEAGRASS_ROOT_CARBON_OXYGEN_EXCHANGE
     real(8), pointer      :: Rt_DIC_flux_max            ! [umol.DIC g-1.rt.drywt s-1] Maximum uptake rate of DIC in the roots 
@@ -748,40 +697,30 @@ MODULE mod_seagrass
 # endif
     ! photosynthesis: nutrient-limit
 # if defined SEAGRASS_LEAF_NUTRIENT_UPTAKE
-    real(8), pointer      :: Lf_NO3_uptake_max          ! [umol.NO3 g-1.lf.drywt s-1] Maximum uptake rate of NO3 in the leaves
+    real(8), pointer      :: Lf_NO3_uptake_max          ! [umol.NO3 m-2.lf s-1]       Maximum uptake rate of NO3 in the leaves
     real(8), pointer      :: k_lf_NO3                   ! [umol.NO3 L-1]              Half saturation consentration of NO3 in water column for growth
-    real(8), pointer      :: smin_lf_NO3                ! [umol.NO3 L-1]              Minimum consentration of NO3 in water column for uptake
-    real(8), pointer      :: Lf_NO3_ratio_slope         ! [ ]                         Slope of nitrogen species ratio term to multiply michaelis-menten
-    real(8), pointer      :: Lf_NH4_uptake_max          ! [umol.NH4 g-1.lf.drywt s-1] Maximum uptake rate of NH4 in the leaves
+    real(8), pointer      :: Lf_NH4_uptake_max          ! [umol.NH4 m-2.lf s-1]       Maximum uptake rate of NH4 in the leaves
     real(8), pointer      :: k_lf_NH4                   ! [umol.NH4 L-1]              Half saturation consentration of NH4 in water column for growth
-    real(8), pointer      :: smin_lf_NH4                ! [umol.NH4 L-1]              Minimum consentration of NH4 in water column for uptake
-    real(8), pointer      :: Lf_NH4_ratio_slope         ! [ ]                         Slope of nitrogen species ratio term to multiply michaelis-menten
-    real(8), pointer      :: Lf_PO4_uptake_max          ! [umol.PO4 g-1.lf.drywt s-1] Maximum uptake rate of PO4 in the leaves
+    real(8), pointer      :: Lf_PO4_uptake_max          ! [umol.PO4 m-2.lf s-1]       Maximum uptake rate of PO4 in the leaves
     real(8), pointer      :: k_lf_PO4                   ! [umol.PO4 L-1]              Half saturation consentration of PO4 in water column for growth
-    real(8), pointer      :: smin_lf_PO4                ! [umol.PO4 L-1]              Minimum consentration of PO4 in water column for uptake
 # endif
 # if defined SEAGRASS_ROOT_NUTRIENT_UPTAKE
     real(8), pointer      :: Rt_NO3_flux_max            ! [umol.NO3 g-1.rt.drywt s-1] Maximum uptake rate of NO3 in the roots 
     real(8), pointer      :: k_rt_NO3                   ! [umol.NO3 L-1]              Half saturation consentration of NO3 in soil pore water for growth
-    real(8), pointer      :: smin_rt_NO3                ! [umol.NO3 L-1]              Minimum consentration of NO3 in soil pore water for uptake
-    real(8), pointer      :: Rt_NO3_ratio_slope         ! [ ]                         Slope of nitrogen species ratio term to multiply michaelis-menten
     real(8), pointer      :: Rt_NH4_flux_max            ! [umol.NH4 g-1.rt.drywt s-1] Maximum uptake rate of NH4 in the roots 
     real(8), pointer      :: k_rt_NH4                   ! [umol.NH4 L-1]              Half saturation consentration of NH4 in soil pore water for growth
-    real(8), pointer      :: smin_rt_NH4                ! [umol.NH4 L-1]              Minimum consentration of NH4 in soil pore water for uptake
-    real(8), pointer      :: Rt_NH4_ratio_slope         ! [ ]                         Slope of nitrogen species ratio term to multiply michaelis-menten
     real(8), pointer      :: Rt_PO4_flux_max            ! [umol.PO4 g-1.rt.drywt s-1] Maximum uptake rate of PO4 in the roots 
     real(8), pointer      :: k_rt_PO4                   ! [umol.PO4 L-1]              Half saturation consentration of PO4 in soil pore water for growth
-    real(8), pointer      :: smin_rt_PO4                ! [umol.PO4 L-1]              Minimum consentration of PO4 in soil pore water for uptake
 # endif
     ! respiration: DO-limit
-    real(8), pointer      :: Lf_DO_uptake_max           ! [umol.DO g-1.lf.drywt s-1]  Maximum uptake rate of DO in the leaves
+    real(8), pointer      :: Lf_DO_uptake_max           ! [umol.DO m-2.lf s-1]        Maximum uptake rate of DO in the leaves
     real(8), pointer      :: k_lf_DO                    ! [umol.DO L-1]               Half saturation consentration of DO in water column for respiration
 # if defined SEAGRASS_ROOT_CARBON_OXYGEN_EXCHANGE
     real(8), pointer      :: Rt_DO_flux_max             ! [umol.DO g-1.rt.drywt s-1]  Maximum uptake rate of DO in the roots 
     real(8), pointer      :: k_rt_DO                    ! [umol.DO L-1]               Half saturation consentration of DO in soil pore water for growth
 # endif
     ! respiration: required
-    real(8), pointer      :: R_basal                    ! [umol.C g-1.leaf s-1]       Maximum respiration rate
+    real(8), pointer      :: R_basal                    ! [umol.C m-2.leaf s-1]       Maximum respiration rate
     real(8), pointer      :: Turnover_rate              ! [umol.C umol-1.C day-1]     Base mass turnover rate (dieoff) in fraction of mass per day
     ! dieoff when respiration is insufficient
     real(8), pointer      :: max_anoxic_dieoff_rate     ! [mol.C mol-1.C day-1]       maximum dieoff due to anoxia in fraction of mass per day, represents atypical modes of survival such as anaerobic respiration and cellular canibalism which limits extreme death rates
@@ -890,12 +829,6 @@ MODULE mod_seagrass
     real(8)               :: sumCUpPos                  ! [umol.DIC m-2.sg.hab s-1]   sum of all potential DIC uptake (used for scaling/normalizing uptake proportions)
     real(8)               :: Growth_limit_DIC           ! [umol.C m-2.sg.hab s-1]     Photosynthesis/growth rate possible as limited by DIC uptake
     ! photosynthesis: nutrient-limit
-# if defined SEAGRASS_LEAF_NUTRIENT_UPTAKE
-    real(8)               :: ocean_N_conc               ! [umol.N L-1]                NO3 + NH4 concentration of ocean water
-# endif
-# if defined SEAGRASS_ROOT_NUTRIENT_UPTAKE
-    real(8)               :: sed_N(Nsed)                ! [umol.N L-1]                NO3 + NH4 consentration of sediment (in each sediment layer)
-# endif
 # if defined SEAGRASS_LEAF_NUTRIENT_UPTAKE && defined SEAGRASS_ROOT_NUTRIENT_UPTAKE
     real(8)               :: NO3_uptake_possible(0:Nsed)! [umol.NO3 m-2.sg.hab s-1]   NO3 uptake rate possible in each layer; 0 = water column, 1-Nsed = sediment layers
     real(8)               :: NH4_uptake_possible(0:Nsed)! [umol.NH4 m-2.sg.hab s-1]   NH4 uptake rate possible in each layer; 0 = water column, 1-Nsed = sediment layers
@@ -996,7 +929,7 @@ MODULE mod_seagrass
     P_max               =>  SGRASS(ng)%P_max                  (species)     ! [umol.C m-2.leaf s-1]       Maximum photoynthesis rate
     I_k                 =>  SGRASS(ng)%I_k                    (species)     ! [umol.photon m-2 s-1]       Irradiance where the initial slope intersects P_max on the photosynthesis-irradiance curve
     ! photoynthesis: DIC-limit
-    Lf_DIC_uptake_max   =>  SGRASS(ng)%Lf_DIC_uptake_max      (species)     ! [umol.DIC g-1.lf.drywt s-1] Maximum uptake rate of DIC in the leaves
+    Lf_DIC_uptake_max   =>  SGRASS(ng)%Lf_DIC_uptake_max      (species)     ! [umol.DIC m-2.lf s-1]       Maximum uptake rate of DIC in the leaves
     k_lf_DIC            =>  SGRASS(ng)%k_lf_DIC               (species)     ! [umol.DIC L-1]              Half saturation consentration of DIC in water column for growth
 # if defined SEAGRASS_ROOT_CARBON_OXYGEN_EXCHANGE
     Rt_DIC_flux_max     =>  SGRASS(ng)%Rt_DIC_flux_max        (species)     ! [umol.DIC g-1.rt.drywt s-1] Maximum uptake rate of DIC in the roots 
@@ -1004,40 +937,30 @@ MODULE mod_seagrass
 # endif
     ! photoynthesis: nutrient-limit
 # if defined SEAGRASS_LEAF_NUTRIENT_UPTAKE
-    Lf_NO3_uptake_max   =>  SGRASS(ng)%Lf_NO3_uptake_max      (species)     ! [umol.NO3 g-1.lf.drywt s-1] Maximum uptake rate of NO3 in the leaves
+    Lf_NO3_uptake_max   =>  SGRASS(ng)%Lf_NO3_uptake_max      (species)     ! [umol.NO3 m-2.lf s-1]       Maximum uptake rate of NO3 in the leaves
     k_lf_NO3            =>  SGRASS(ng)%k_lf_NO3               (species)     ! [umol.NO3 L-1]              Half saturation consentration of NO3 in water column for growth
-    smin_lf_NO3         =>  SGRASS(ng)%smin_lf_NO3            (species)     ! [umol.NO3 L-1]              Minimum consentration of NO3 in water column for uptake
-    Lf_NO3_ratio_slope  =>  SGRASS(ng)%Lf_NO3_ratio_slope     (species)     ! [ ]                         Slope of nitrogen species ratio term to multiply michaelis-menten
-    Lf_NH4_uptake_max   =>  SGRASS(ng)%Lf_NH4_uptake_max      (species)     ! [umol.NH4 g-1.lf.drywt s-1] Maximum uptake rate of NH4 in the leaves
+    Lf_NH4_uptake_max   =>  SGRASS(ng)%Lf_NH4_uptake_max      (species)     ! [umol.NH4 m-2.lf s-1]       Maximum uptake rate of NH4 in the leaves
     k_lf_NH4            =>  SGRASS(ng)%k_lf_NH4               (species)     ! [umol.NH4 L-1]              Half saturation consentration of NH4 in water column for growth
-    smin_lf_NH4         =>  SGRASS(ng)%smin_lf_NH4            (species)     ! [umol.NH4 L-1]              Minimum consentration of NH4 in water column for uptake
-    Lf_NH4_ratio_slope  =>  SGRASS(ng)%Lf_NH4_ratio_slope     (species)     ! [ ]                         Slope of nitrogen species ratio term to multiply michaelis-menten
-    Lf_PO4_uptake_max   =>  SGRASS(ng)%Lf_PO4_uptake_max      (species)     ! [umol.PO4 g-1.lf.drywt s-1] Maximum uptake rate of PO4 in the leaves
+    Lf_PO4_uptake_max   =>  SGRASS(ng)%Lf_PO4_uptake_max      (species)     ! [umol.PO4 m-2.lf s-1]       Maximum uptake rate of PO4 in the leaves
     k_lf_PO4            =>  SGRASS(ng)%k_lf_PO4               (species)     ! [umol.PO4 L-1]              Half saturation consentration of PO4 in water column for growth
-    smin_lf_PO4         =>  SGRASS(ng)%smin_lf_PO4            (species)     ! [umol.PO4 L-1]              Minimum consentration of PO4 in water column for uptake
 # endif
 # if defined SEAGRASS_ROOT_NUTRIENT_UPTAKE
     Rt_NO3_flux_max     =>  SGRASS(ng)%Rt_NO3_flux_max        (species)     ! [umol.NO3 g-1.rt.drywt s-1] Maximum uptake rate of NO3 in the roots 
     k_rt_NO3            =>  SGRASS(ng)%k_rt_NO3               (species)     ! [umol.NO3 L-1]              Half saturation consentration of NO3 in soil pore water for growth
-    smin_rt_NO3         =>  SGRASS(ng)%smin_rt_NO3            (species)     ! [umol.NO3 L-1]              Minimum consentration of NO3 in soil pore water for uptake
-    Rt_NO3_ratio_slope  =>  SGRASS(ng)%Rt_NO3_ratio_slope     (species)     ! [ ]                         Slope of nitrogen species ratio term to multiply michaelis-menten
     Rt_NH4_flux_max     =>  SGRASS(ng)%Rt_NH4_flux_max        (species)     ! [umol.NH4 g-1.rt.drywt s-1] Maximum uptake rate of NH4 in the roots 
     k_rt_NH4            =>  SGRASS(ng)%k_rt_NH4               (species)     ! [umol.NH4 L-1]              Half saturation consentration of NH4 in soil pore water for growth
-    smin_rt_NH4         =>  SGRASS(ng)%smin_rt_NH4            (species)     ! [umol.NH4 L-1]              Minimum consentration of NH4 in soil pore water for uptake
-    Rt_NH4_ratio_slope  =>  SGRASS(ng)%Rt_NH4_ratio_slope     (species)     ! [ ]                         Slope of nitrogen species ratio term to multiply michaelis-menten
     Rt_PO4_flux_max     =>  SGRASS(ng)%Rt_PO4_flux_max        (species)     ! [umol.PO4 g-1.rt.drywt s-1] Maximum uptake rate of PO4 in the roots 
     k_rt_PO4            =>  SGRASS(ng)%k_rt_PO4               (species)     ! [umol.PO4 L-1]              Half saturation consentration of PO4 in soil pore water for growth
-    smin_rt_PO4         =>  SGRASS(ng)%smin_rt_PO4            (species)     ! [umol.PO4 L-1]              Minimum consentration of PO4 in soil pore water for uptake
 # endif
     ! respiration: DO-limit
-    Lf_DO_uptake_max    =>  SGRASS(ng)%Lf_DO_uptake_max       (species)     ! [umol.DO g-1.lf.drywt s-1]  Maximum uptake rate of DO in the leaves
+    Lf_DO_uptake_max    =>  SGRASS(ng)%Lf_DO_uptake_max       (species)     ! [umol.DO m-2.lf s-1]        Maximum uptake rate of DO in the leaves
     k_lf_DO             =>  SGRASS(ng)%k_lf_DO                (species)     ! [umol.DO L-1]               Half saturation consentration of DO in water column for respiration
 # if defined SEAGRASS_ROOT_CARBON_OXYGEN_EXCHANGE
     Rt_DO_flux_max      =>  SGRASS(ng)%Rt_DO_flux_max         (species)     ! [umol.DO g-1.rt.drywt s-1]  Maximum uptake rate of DO in the roots 
     k_rt_DO             =>  SGRASS(ng)%k_rt_DO                (species)     ! [umol.DO L-1]               Half saturation consentration of DO in soil pore water for growth
 # endif
     ! respiration: required
-    R_basal             =>  SGRASS(ng)%R_basal                (species)     ! [umol.C g-1.leaf s-1]       Maximum respiration rate
+    R_basal             =>  SGRASS(ng)%R_basal                (species)     ! [umol.C m-2.leaf s-1]       Maximum respiration rate
     Turnover_rate       =>  SGRASS(ng)%Turnover_rate          (species)     ! [umol.C umol-1.C day-1]     Base mass turnover rate (dieoff) in fraction of mass per day
     ! dieoff when respiration is insufficient
     max_anoxic_dieoff_rate =>  SGRASS(ng)%max_anoxic_dieoff_rate(species)   ! [mol.C mol-1.C day-1]       maximum dieoff due to anoxia in fraction of mass per day, represents atypical modes of survival such as anaerobic respiration and cellular canibalism which limits extreme death rates
@@ -1228,13 +1151,13 @@ MODULE mod_seagrass
 ! Photosynthesis rate DIC limit -----------------------------------------------------------------------
 
     ! DIC_uptake_possible(:)    [umol.DIC m-2.sg.hab s-1]   DIC uptake rate possible in each layer; 0 = water column, 1-Nsed = sediment layers
-    ! Lf_DIC_uptake_max         [umol.DIC g-1.lf.drywt s-1] Maximum uptake rate of DIC in the leaves
-    ! LfDryBm                   [g.lf.drywt m-2.sg.hab]     Seagrass leaf dry weight biomass per unit ground area (in seagrass habitat area)
+    ! Lf_DIC_uptake_max         [umol.DIC m-2.lf s-1]       Maximum uptake rate of DIC in the leaves
+    ! LAI                       [m2.leaf m-2.sg.hab]        Leaf area index: one-sided green leaf area per unit ground surface area 
     ! ocean_DIC_conc            [umol.DIC L-1]              DIC concentration of ocean water 
     ! k_lf_DIC                  [umol.DIC L-1]              Half saturation consentration of DIC in water column for growth
 
-    ! [umol.DIC/m2.hab s]  = [umol.DIC/g.lf s] [g.lf/m2.hab] ( Michaelis-Menten term                      )
-    DIC_uptake_possible(0) = Lf_DIC_uptake_max * LfDryBm     * ocean_DIC_conc / (k_lf_DIC + ocean_DIC_conc)
+    ! [umol.DIC/m2.hab s]  = [umol.DIC/m2.lf s] [m2.lf/m2.hab] ( Michaelis-Menten term                      )
+    DIC_uptake_possible(0) = Lf_DIC_uptake_max  * LAI          * ocean_DIC_conc / (k_lf_DIC + ocean_DIC_conc)
     ! [umol.DIC/m2.hab s]  = min( [umol.DIC/m2.hab s]   ,       [umol.DIC/L]   [m/s](1000L/m3)
     DIC_uptake_possible(0) = min( DIC_uptake_possible(0), 0.5d0*ocean_DIC_conc*dz/dt*1000.0d0 ) ! first order interpolation at low concentration limit to prevent overdraw
 
@@ -1265,23 +1188,15 @@ MODULE mod_seagrass
 
 # if defined SEAGRASS_LEAF_NUTRIENT_UPTAKE
     ! CHM_uptake_possible(:)    [umol.CHM m-2.sg.hab s-1]   Chemical (CHM) uptake rate possible in each layer; 0 = water column, 1-Nsed = sediment layers
-    ! Lf_CHM_uptake_max         [umol.CHM g-1.lf.drywt s-1] Maximum uptake rate of CHM in the leaves
-    ! LfDryBm                   [g.lf.drywt m-2.sg.hab]     Seagrass leaf dry weight biomass per unit ground area (in seagrass habitat area)
+    ! Lf_CHM_uptake_max         [umol.CHM m-2.lf s-1]       Maximum uptake rate of CHM in the leaves
+    ! LAI                       [m2.leaf m-2.sg.hab]        Leaf area index: one-sided green leaf area per unit ground surface area 
     ! ocean_CHM_conc            [umol.CHM L-1]              CHM concentration of ocean water 
     ! k_lf_CHM                  [umol.CHM L-1]              Half saturation consentration of CHM in water column for growth
-    ! smin_lf_CHM               [umol.NO3 L-1]              Minimum consentration of CHM in water column for uptake
-    ! Lf_CHM_ratio_slope        [ ]                         Slope of nitrogen species ratio term to multiply michaelis-menten
 
-    ! ocean_N_conc              [umol.N L-1]                NO3 + NH4 concentration of ocean water
-    ocean_N_conc = ocean_NO3_conc + ocean_NH4_conc
-
-    ! [umol.CHM/m2.hab s]  = [umol.CHM/g.lf s] (                                                              ) [g.lf/m2.hab] ( Michaelis-Menten term                      )
-    NO3_uptake_possible(0) = Lf_NO3_uptake_max * (Lf_NO3_ratio_slope*(ocean_NO3_conc/ocean_N_conc-0.5d0)+1.0d0) * LfDryBm     &
-      * (ocean_NO3_conc-smin_lf_NO3) / (k_lf_NO3 + ocean_NO3_conc-smin_lf_NO3)
-    NH4_uptake_possible(0) = Lf_NH4_uptake_max * (Lf_NH4_ratio_slope*(ocean_NH4_conc/ocean_N_conc-0.5d0)+1.0d0) * LfDryBm     &
-      * (ocean_NH4_conc-smin_lf_NH4) / (k_lf_NH4 + ocean_NH4_conc-smin_lf_NH4)
-    PO4_uptake_possible(0) = Lf_PO4_uptake_max                                                                  * LfDryBm     &
-      * (ocean_PO4_conc-smin_lf_PO4) / (k_lf_PO4 + ocean_PO4_conc-smin_lf_PO4)
+    ! [umol.CHM/m2.hab s]  = [umol.CHM/m2.lf s] [m2.lf/m2.hab] ( Michaelis-Menten term                      )
+    NO3_uptake_possible(0) = Lf_NO3_uptake_max * LAI           * ocean_NO3_conc / (k_lf_NO3 + ocean_NO3_conc)
+    NH4_uptake_possible(0) = Lf_NH4_uptake_max * LAI           * ocean_NH4_conc / (k_lf_NH4 + ocean_NH4_conc)
+    PO4_uptake_possible(0) = Lf_PO4_uptake_max * LAI           * ocean_PO4_conc / (k_lf_PO4 + ocean_PO4_conc)
     ! [umol.CHM/m2.hab s]  = min( [umol.CHM/m2.hab s]   ,      [umol.CHM/L]    [m/s](1000L/m3)
     NO3_uptake_possible(0) = min( NO3_uptake_possible(0), 0.5d0*ocean_NO3_conc*dz/dt*1000.0d0 ) ! first order interpolation at low concentration limit to prevent overdraw
     NH4_uptake_possible(0) = min( NH4_uptake_possible(0), 0.5d0*ocean_NH4_conc*dz/dt*1000.0d0 ) ! first order interpolation at low concentration limit to prevent overdraw
@@ -1294,21 +1209,13 @@ MODULE mod_seagrass
     ! RtDryBm                     [g.rt.drywt m-2.sg.hab]     Seagrass root dry weight biomass per unit ground area (in seagrass habitat area)
     ! sed_CHM(Nsed)               [umol.CHM L-1]              CHM consentration of sediment (in each sediment layer)
     ! k_rt_CHM                    [umol.CHM L-1]              Half saturation consentration of CHM in soil pore water for growth
-    ! smin_rt_CHM                 [umol.CHM L-1]              Minimum consentration of CHM in soil pore water for uptake
-    ! Rt_CHM_ratio_slope          [ ]                         Slope of nitrogen species ratio term to multiply michaelis-menten
-
-    ! sed_N(Nsed)                 [umol.N L-1]                NO3 + NH4 consentration of sediment (in each sediment layer)
-    sed_N(:) = sed_NO3(:) + sed_NH4(:)
-
-    ! [umol.CHM/m2.hab s]       = [umol.CHM/g.rt s] []                     (                                                      ) [g.rt/m2.hab] []
-    NO3_uptake_possible(1:Nsed) = Rt_NO3_flux_max   * root_mass_profile(:) &
-      * (Rt_NO3_ratio_slope*(sed_NO3(:)/sed_N(:)-0.5d0)+1.0d0) * RtDryBm   &
-      * ( (sed_NO3(:)-smin_rt_NO3) / (k_rt_NO3 + sed_NO3(:)-smin_rt_NO3) )
-    NH4_uptake_possible(1:Nsed) = Rt_NH4_flux_max   * root_mass_profile(:) &
-      * (Rt_NH4_ratio_slope*(sed_NH4(:)/sed_N(:)-0.5d0)+1.0d0) * RtDryBm   &
-      * ( (sed_NH4(:)-smin_rt_NH4) / (k_rt_NH4 + sed_NH4(:)-smin_rt_NH4) )
-    PO4_uptake_possible(1:Nsed) = Rt_PO4_flux_max   * root_mass_profile(:) * RtDryBm   &
-      * ( (sed_PO4(:)-smin_rt_PO4) / (k_rt_PO4 + sed_PO4(:)-smin_rt_PO4) )
+    ! [umol.CHM/m2.hab s]       = [umol.CHM/g.rt s] []                     [g.rt/m2.hab] []
+    NO3_uptake_possible(1:Nsed) = Rt_NO3_flux_max   * root_mass_profile(:) * RtDryBm     &
+      * ( sed_NO3(:) / (k_rt_NO3 + sed_NO3(:)) )
+    NH4_uptake_possible(1:Nsed) = Rt_NH4_flux_max   * root_mass_profile(:) * RtDryBm     &
+      * ( sed_NH4(:) / (k_rt_NH4 + sed_NH4(:)) )
+    PO4_uptake_possible(1:Nsed) = Rt_PO4_flux_max   * root_mass_profile(:) * RtDryBm     &
+      * ( sed_PO4(:) / (k_rt_PO4 + sed_PO4(:)) )
     ! [umol.CHM/m2.hab s]       = min( [umol.CHM/m2.hab s]        ,      [umol.CHM/L] [mm                   /s](1000L/m3)(m/1000mm)
     NO3_uptake_possible(1:Nsed) = min( NO3_uptake_possible(1:Nsed), 0.5d0*sed_NO3(:)*sed_layer_thickness(:)/dt) ! first order interpolation at low concentration limit to prevent overdraw
     NH4_uptake_possible(1:Nsed) = min( NH4_uptake_possible(1:Nsed), 0.5d0*sed_NH4(:)*sed_layer_thickness(:)/dt) ! first order interpolation at low concentration limit to prevent overdraw
@@ -1519,13 +1426,13 @@ MODULE mod_seagrass
 ! Respiration rate DO limit --------------------------------------------------------------------------
 
     ! DO_uptake_possible(:)       [umol.DO m-2.sg.hab s-1]    DO uptake rate possible in each layer; 0 = water column, 1-Nsed = sediment layers
-    ! Lf_DO_uptake_max            [umol.DO g-1.lf.drywt s-1]  Maximum uptake rate of DO in the leaves
-    ! LfDryBm                     [g.lf.drywt m-2.sg.hab]     Seagrass leaf dry weight biomass per unit ground area (in seagrass habitat area)
+    ! Lf_DO_uptake_max            [umol.DO m-2.lf s-1]        Maximum uptake rate of DO in the leaves
+    ! LAI                         [m2.leaf m-2.sg.hab]        Leaf area index: one-sided green leaf area per unit ground surface area 
     ! ocean_DO__conc              [umol.DO L-1]               DIC concentration of ocean water 
     ! k_lf_DO                     [umol.DO L-1]               Half saturation consentration of DO in water column for respiration
 
-    ! [umol.DO/m2.hab s]  = [umol.DO/g.lf s] [g.lf/m2.hab] ( Michaelis-Menten term                     )
-    DO_uptake_possible(0) = Lf_DO_uptake_max * LfDryBm     * ocean_DO__conc / (k_lf_DO + ocean_DO__conc)
+    ! [umol.DO/m2.hab s]  = [umol.DO/m2.lf s] [m2.lf/m2.hab] ( Michaelis-Menten term                     )
+    DO_uptake_possible(0) = Lf_DO_uptake_max  * LAI          * ocean_DO__conc / (k_lf_DO + ocean_DO__conc)
     ! [umol.DO/m2.hab s]  = min( [umol.DO/m2.hab s]   ,      [umol.DO/L]     [m/s](1000L/m3)
     DO_uptake_possible(0) = min( DO_uptake_possible(0), 0.5d0*ocean_DO__conc*dz/dt*1000.0d0 ) ! first order interpolation at low concentration limit to prevent overdraw
 
@@ -1565,14 +1472,15 @@ MODULE mod_seagrass
 
     ! Resp_req                    [umol.C m-2.sg.hab s-1]     Respiration rate required for maintenance in this time step
     ! SgCBmF                      [umol.C m-2.sg.hab]         Seagrass leaf+root carbon-biomass per unit ground area (in seagrass habitat area) updates on fine time interval
-    ! R_basal                     [umol.C g-1.leaf s-1]       Maximum respiration rate
+    ! R_basal                     [umol.C m-2.leaf s-1]       Maximum respiration rate
+    ! rho_lf                      [kg.drywt m-2.leaf]         Rho_leaf: Species specific leaf mass density
     ! SgMperC                     [g.drywt mol-1.C]           Species specific biomass mass per unit carbon based on C-N-P ratio according to (CH2O)x(NH3)y(H3PO4)z as the chemical formula for biomass
     ! dt                          [s]                         time step duration
 
-    ! respFrac = R_basal*SgMperC*dt*0.000001        The fraction of mass required for respiration this time step! [umol.C g-1.leaf s-1] [g.drywt mol-1.C] [s] (mol/1000000umol) = 0.000001 []
+    ! respFrac = R_basal/rho_lf*SgMperC*dt*0.000000001        The fraction of mass required for respiration this time step! [umol.C m-2.leaf s-1] [m2.leaf kg-1.drywt ] [g.drywt mol-1.C] [s] (kg/1000g)(mol/1000000umol) = 0.000000001 []
     ! mass_respired = SgCBmF(respFrac)/(1+respFrac)/dt        With a 1:1 ratio of carbon-biomass to respiration we get:
     
-    Resp_req = SgCBmF * (R_basal*SgMperC*dt*0.000001)/(1+R_basal*SgMperC*dt*0.000001) / dt
+    Resp_req = SgCBmF * (R_basal/rho_lf*SgMperC*dt*0.000000001)/(1+R_basal/rho_lf*SgMperC*dt*0.000000001) / dt
 
 ! Respiration/Un-growth rate -------------------------------------------------------------------------
 
@@ -1612,21 +1520,22 @@ MODULE mod_seagrass
       ! anoxic_dieoff             [umol.C m-2.sg.hab]         Seagrass dieoff due to anoxia this time step
       ! Resp_pos                  [umol.C m-2.sg.hab s-1]     Respiration rate possible in this time step
       ! HabArea                   [m2.sg.hab]                 Seagrass habitat ground area in grid cell (such that seagrass coverage (p_sgrass) times the grid area equals the habitat area)
-      ! R_basal                   [umol.C g-1.leaf s-1]       Maximum respiration rate
+      ! R_basal                   [umol.C m-2.leaf s-1]       Maximum respiration rate
+      ! rho_lf                    [kg.drywt m-2.leaf]         Rho_leaf: Species specific leaf mass density
       ! SgMperC                   [g.drywt mol-1.C]           Species specific biomass mass per unit carbon based on C-N-P ratio according to (CH2O)x(NH3)y(H3PO4)z as the chemical formula for biomass
       ! SgCBmF                    [umol.C m-2.sg.hab]         Seagrass leaf+root carbon-biomass per unit ground area (in seagrass habitat area) updates on fine time interval
 
       ! respiration possible           = maintenance repiration rate                                                          * biomass maintainable
       ! [umol.resp / s               ] = [umol.resp / umol.C s                                                              ] [umol.C                      ]
-      ! [umol.resp/m2.hab s] [m2.hab ] = [umol.resp/g.lf s] [g.drywt/mol.C] (mol.C/1000000umol.C) [umol.C/m2.hab     ] [m2.hab ]
-      ! Resp_pos             * HabArea = R_basal            * SgMperC       * 0.000001d0          * SgCBm_maintainable * HabArea
+      ! [umol.resp/m2.hab s] [m2.hab ] = [umol.resp/m2.lf s] [m2.lf/kg.drywt] [g.drywt/mol.C] (kg/1000g)(mol.C/1000000umol.C) [umol.C/m2.hab     ] [m2.hab ]
+      ! Resp_pos             * HabArea = R_basal             / rho_lf         * SgMperC       * 0.000000001d0                 * SgCBm_maintainable * HabArea
 
       ! solve for SgCBm_maintainable:
-      ! SgCBm_maintainable = Resp_pos / (R_basal            * SgMperC       * 0.000001d0)
+      ! SgCBm_maintainable = Resp_pos / (R_basal             / rho_lf         * SgMperC       * 0.000000001d0)
 
       ! anoxic_dieoff = SgCBmF - SgCBm_maintainable
 
-      anoxic_dieoff = SgCBmF - (Resp_pos / (R_basal         * SgMperC       * 0.000001d0))
+      anoxic_dieoff = SgCBmF - (Resp_pos / (R_basal             / rho_lf         * SgMperC       * 0.000000001d0))
 
       ! limit dieoff rate (especially for when DO intake is zero)
       ! max_anoxic_dieoff_rate      [mol.C mol-1.C day-1]       maximum dieoff due to anoxia in fraction of mass per day, represents atypical modes of survival such as anaerobic respiration and cellular canibalism which limits extreme death rates
